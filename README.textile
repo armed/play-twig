@@ -2,5 +2,4 @@ h2. Play plugin for twig-persist
 
 This plugin enables to use twig-persist (an object datastore library for Google App Engine/J) in Play! Framework.
 
-Project is not tested and it is not available at official play plugin repository. Feel free to use and test it,
-I appreciate any feedback.
+Project is not tested and it is not yet available at official play plugin repository. Feel free to use and test it, I appreciate any feedback.
