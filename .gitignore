@@ -1,3 +1,7 @@
 .*
 !.gitignore
-
+tmp
+dist
+eclipse
+*.pyc
+play-twig.jar
