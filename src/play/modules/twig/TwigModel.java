@@ -1,28 +1,43 @@
 package play.modules.twig;
 
-import java.util.Collection;
-import java.util.Map;
-
 import com.google.appengine.api.datastore.Key;
-import com.vercer.engine.persist.FindCommand.RootFindCommand;
-import com.vercer.engine.persist.ObjectDatastore;
-import com.vercer.engine.persist.annotation.AnnotationObjectDatastore;
 
-public class TwigModel {
-	
-	public static ObjectDatastore ds() {
-		return new AnnotationObjectDatastore();
-	}
-	
-	public <T extends TwigModel> RootFindCommand<? extends TwigModel> find() {
-		return ds().find().type(getClass());
-	}
-	
+/**
+ * Base model class. Use it only for convenience.
+ * @author Artem Medeu
+ *
+ */
+public class TwigModel {	
+		
 	public Key store() {
-		return ds().store().instance(this).returnKeyNow();
+		return Twig.store(this);
 	}
 	
-	public static Map<? extends TwigModel, Key> storeAll(Collection<? extends TwigModel> entities) {
-		return ds().store().instances(entities).returnKeysNow();		
+	public Key store(Object parent) {
+		return Twig.store(this, parent);
+	}
+	
+	public Key store(String keyName) {
+		return Twig.store(this, keyName);
+	}
+	
+	public Key store(String keyName, Object parent) {
+		return Twig.store(this, keyName, parent);
+	}
+	
+	public void associate() {
+		Twig.associate(this);
+	}
+	
+	public void disassociate() {
+		Twig.disassociate(this);
+	}
+	
+	public void update() {
+		Twig.update(this);
+	}
+	
+	public void delete() {
+		Twig.delete(this);
 	}
 }
