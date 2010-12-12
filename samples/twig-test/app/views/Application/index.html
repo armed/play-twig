@@ -1,6 +1,12 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-${result.name}
-<br />
-${result.employees[0].fullName}
+<p>
+Department: ${result.name}
+</p>
+<p>
+Employees:
+</p>
+#{list items: result.employees, as: 'emp'}
+    ${emp.fullName}<br />
+#{/list}

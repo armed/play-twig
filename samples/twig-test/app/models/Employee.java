@@ -7,7 +7,9 @@ import play.modules.twig.TwigModel;
 public class Employee extends TwigModel {
 		
 	public String fullName;
+	@Key
 	public String email;
 	
+	@Parent
 	public Department department; 
 }

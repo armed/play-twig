@@ -8,6 +8,7 @@ import play.modules.twig.TwigModel;
 
 public class Department extends TwigModel {
 		
+	@Key
 	public String name;
 	
 	@Child
