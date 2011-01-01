@@ -1,5 +1,7 @@
 package play.modules.twig;
 
+import java.io.Serializable;
+
 import com.google.appengine.api.datastore.Key;
 
 /**
@@ -7,7 +9,7 @@ import com.google.appengine.api.datastore.Key;
  * @author Artem Medeu
  *
  */
-public class TwigModel {	
+public class TwigModel implements Serializable {	
 		
 	public Key store() {
 		return Twig.store(this);
