@@ -27,6 +27,14 @@ public class TwigModel implements Serializable {
 		return Twig.store(this, keyName, parent);
 	}
 	
+	public void storeOrUpdate() {
+	    Twig.storeOrUpdate(this);
+	}
+	
+	public void storeOrUpdate(Object parent) {
+        Twig.storeOrUpdate(this, parent);
+    }
+	
 	public void associate() {
 		Twig.associate(this);
 	}
