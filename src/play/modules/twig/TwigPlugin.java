@@ -17,60 +17,60 @@ import com.vercer.engine.persist.ObjectDatastore;
  */
 public class TwigPlugin extends PlayPlugin {
 
-	protected static Boolean prod;
+    protected static Boolean prod;
 
-	/**
-	 * Set up custom user datastore by getting class name from application.conf
-	 */
-	@SuppressWarnings("unchecked")
-	private void setupDatastore() {
-		String twigDatastoreName = Play.configuration.getProperty("twig.datastore");
+    /**
+     * Set up custom user datastore by getting class name from application.conf
+     */
+    @SuppressWarnings("unchecked")
+    private void setupDatastore() {
+        String twigDatastoreName = Play.configuration.getProperty("twig.datastore");
 
-		if (twigDatastoreName != null) {
-			try {
-				TwigDatastoreFactory.setCutomDatastoreType(
-						(Class<? extends ObjectDatastore>) Play.classloader.loadClass(twigDatastoreName));
-			} catch (ClassNotFoundException e) {
-				throw new RuntimeException("Unable to load datastore class: " + twigDatastoreName, e);
-			}
-		}
-	}
+        if (twigDatastoreName != null) {
+            try {
+                TwigDatastoreFactory.setCutomDatastoreType(
+                        (Class<? extends ObjectDatastore>) Play.classloader.loadClass(twigDatastoreName));
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException("Unable to load datastore class: " + twigDatastoreName, e);
+            }
+        }
+    }
 
-	/**
-	 * setup, when running on GAE environment
-	 */
-	@Override
-	public void onApplicationStart() {
-		if (isProd()) {
-			setupDatastore();
-		}
-	}
+    /**
+     * setup, when running on GAE environment
+     */
+    @Override
+    public void onApplicationStart() {
+        if (isProd()) {
+            setupDatastore();
+        }
+    }
 
-	/**
-	 * setup, when running on developer's machine
-	 */
-	@Override
-	public void beforeInvocation() {
-		if (!isProd()) {
-			setupDatastore();
-		}
-	}
+    /**
+     * setup, when running on developer's machine
+     */
+    @Override
+    public void beforeInvocation() {
+        if (!isProd()) {
+            setupDatastore();
+        }
+    }
 
-	/**
-	 * checks if GAE plugin in production mode
-	 */
-	protected boolean isProd() {
-		if (prod == null) {
-			List<PlayPlugin> plugins = Play.plugins;
-			for (PlayPlugin plugin : plugins) {
-				if (plugin instanceof GAEPlugin) {
-					prod = ((GAEPlugin) plugin).prodGAE;
-					return prod;
-				}
-			}
-			throw new IllegalStateException("Unable to determine GAE environment as GAEPlugin was not detected");
-		} else {
-			return prod;
-		}
-	}
+    /**
+     * checks if GAE plugin in production mode
+     */
+    protected boolean isProd() {
+        if (prod == null) {
+            List<PlayPlugin> plugins = Play.plugins;
+            for (PlayPlugin plugin : plugins) {
+                if (plugin instanceof GAEPlugin) {
+                    prod = ((GAEPlugin) plugin).prodGAE;
+                    return prod;
+                }
+            }
+            throw new IllegalStateException("Unable to determine GAE environment as GAEPlugin was not detected");
+        } else {
+            return prod;
+        }
+    }
 }

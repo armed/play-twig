@@ -10,40 +10,42 @@ import com.vercer.engine.persist.strategy.FieldStrategy;
 
 /**
  * Default ObjectDatastore implementation, which uses Play's classloader.
- * Indexing turned off by default. You can turn it on for specific fields by using {@link Index} annotation.
+ * Indexing turned off by default. You can turn it on for specific fields by
+ * using {@link Index} annotation.
+ * 
  * @author Artem Medeu
- *
+ * 
  */
 public class PlayAnnonationObjectDatastore extends StrategyObjectDatastore {
-	
-	private static boolean indexByDefault = false;
-	
-	public PlayAnnonationObjectDatastore() {
-		this(DatastoreServiceFactory.getDatastoreService());
-	}
 
-	public PlayAnnonationObjectDatastore(DatastoreService datastore) {
-		this(datastore, indexByDefault);
-	}
+    private static boolean indexByDefault = false;
 
-	public PlayAnnonationObjectDatastore(boolean indexed) {
-		this(DatastoreServiceFactory.getDatastoreService(), indexed);
-	}
+    public PlayAnnonationObjectDatastore() {
+        this(DatastoreServiceFactory.getDatastoreService());
+    }
 
-	public PlayAnnonationObjectDatastore(boolean indexed, int defaultVersion) {
-		this(DatastoreServiceFactory.getDatastoreService(), new PlayAnnotationStrategy(indexed, defaultVersion));
-	}
+    public PlayAnnonationObjectDatastore(DatastoreService datastore) {
+        this(datastore, indexByDefault);
+    }
 
-	public PlayAnnonationObjectDatastore(DatastoreService datastore, boolean indexed) {
-		this(datastore, new PlayAnnotationStrategy(indexed, 0));
-	}
+    public PlayAnnonationObjectDatastore(boolean indexed) {
+        this(DatastoreServiceFactory.getDatastoreService(), indexed);
+    }
 
-	public PlayAnnonationObjectDatastore(DatastoreService datastore, FieldStrategy fields) {
-		this(datastore, new PlayAnnotationStrategy(indexByDefault, 0), fields);
-	}
+    public PlayAnnonationObjectDatastore(boolean indexed, int defaultVersion) {
+        this(DatastoreServiceFactory.getDatastoreService(), new PlayAnnotationStrategy(indexed, defaultVersion));
+    }
 
-	protected PlayAnnonationObjectDatastore(DatastoreService datastore, PlayAnnotationStrategy strategy,
-			FieldStrategy fields) {
-		super(datastore, strategy, strategy, strategy, fields);
-	}
+    public PlayAnnonationObjectDatastore(DatastoreService datastore, boolean indexed) {
+        this(datastore, new PlayAnnotationStrategy(indexed, 0));
+    }
+
+    public PlayAnnonationObjectDatastore(DatastoreService datastore, FieldStrategy fields) {
+        this(datastore, new PlayAnnotationStrategy(indexByDefault, 0), fields);
+    }
+
+    protected PlayAnnonationObjectDatastore(DatastoreService datastore, PlayAnnotationStrategy strategy,
+            FieldStrategy fields) {
+        super(datastore, strategy, strategy, strategy, fields);
+    }
 }
